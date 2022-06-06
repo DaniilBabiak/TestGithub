@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Practice.WorkerService-4B00E33E-F3F4-421A-B811-0B1E6AB0DC76</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Practice.Data\Practice.Data.csproj" />
+    <ProjectReference Include="..\Practice.Entities\Practice.Entities.csproj" />
+    <ProjectReference Include="..\Practice.QueueProducers\Practice.QueueProducers.csproj" />
+    <ProjectReference Include="..\Practice.Shared\Practice.Shared.csproj" />
+  </ItemGroup>
+</Project>

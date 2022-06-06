@@ -1,0 +1,45 @@
+<div *ngIf="userChallenge" class="container" style="margin-top: 70px;">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2">
+        <div>
+          <form>
+            <div class="form-group">
+              <label for="name">Challenge Name:</label>
+              <span for="name"> {{userChallenge.challenge.name}}</span>
+              <br>
+              <label for="description">Description: </label>
+              <span for="name"> {{userChallenge.challenge.description}}</span>
+              <br>
+            </div>
+          </form>         
+        </div>        
+      </div>
+
+      <div class="col-md-5 mx-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" sortable="CommitDateTime" (sort)="onSort($event)">Date</th>
+              <th scope="col" sortable="Status" (sort)="onSort($event)">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commit of commits | paginate: config; let i = index">
+              <td>{{commit.commitDateTime | date:'M/d/yy'}} </td>
+              <td>{{commit.status}}</td>
+              <td><a routerLink="/userChallenge/{{userChallenge.id}}/commit/{{commit.id}}/details"><button class="btn btn-primary"> Show details</button></a></td> 
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div>
+
+      <div class="col-sm-8 offset-sm-2">
+      <button class="btn btn-primary btn-primary_footer" (click)="goBack()">go back</button>
+        <a routerLink="/userChallenge/{{userChallenge.id}}/commit/0/details">
+          <button *ngIf="userChallenge.status != 'Completed' && userChallenge.status != 'Expired'"
+          class="btn btn-primary btn-primary_footer">add commit</button>
+        </a>
+      </div>
+    </div>
+  </div>

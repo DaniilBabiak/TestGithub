@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <a routerLink="/achievement/0/details"><button class="btn btn-primary"> Add achievement</button></a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th scope="col" sortable="Name" (sort)="onSort($event)">Title</th>
+                    <th scope="col" sortable="ChallengeType" (sort)="onSort($event)">Challenge Type</th>
+                    <th scope="col" sortable="Streak" (sort)="onSort($event)">Streak</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let achievement of achievements | paginate: config; let i = index">
+                    <td><img class="thumbnail-picture" [src]="createImgPath(achievement.thumbnailPath)" alt="achievement picture"></td>
+                    <td>{{achievement.name}}</td>
+                    <td>{{achievement.typeName}}</td>
+                    <td>{{achievement.streak}}</td>
+                    <td><a routerLink="/achievement/{{achievement.id}}/details"><button class="btn btn-primary"> Show details</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls class="pagination" (pageChange)="pageChanged($event)"></pagination-controls>

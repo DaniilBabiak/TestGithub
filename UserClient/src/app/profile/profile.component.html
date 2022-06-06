@@ -1,0 +1,52 @@
+<div *ngIf="user" class="content-wrapper">
+    <div class="content">
+        <div class="content-left">
+            <div class="input-wrapper">
+                <div class="content-left_input">
+                    <label class="label-flex-basis">First name:</label>
+                    <input class="input-width" type="text" placeholder="Enter FirstName" [(ngModel)]="user.firstName" />
+                </div>
+            </div>
+            <div class="input-wrapper">
+                <div class="content-left_input">
+                    <label class="label-flex-basis">Last name:</label>
+                    <input class="input-width" type="text" placeholder="Enter LastName" [(ngModel)]="user.lastName" />
+                </div>
+            </div>
+            <div class="textarea-wrapper">
+                <div class="content-left_textArea">
+                    <label class="labelAbout" for="about">About me:</label>
+                    <textarea class="textareaAbout" type="about" placeholder="About yourself" [(ngModel)]="user.about"></textarea>
+                </div>
+            </div>
+            <div class="content-left_button">
+                <a routerLink="/userChallenges"><button class="btn btn-primary">Your challenges</button></a>
+            </div>
+            <div class="content-left_button">
+                <a routerLink="/profile/achievements"><button class="btn btn-primary">Your achievements</button></a>
+            </div>
+            <div class="content-left_button">
+                <button class="btn btn-primary" (click)="saveUser()">Save changes</button>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="content-right_imageWrapper">
+                <img class="profilePhoto" [src]="createImgPath(user.photoPath)" alt="user photo">
+            </div>
+            <div class="content-right_button">
+                <div class="rigth-button-wrapper">
+                    <app-file-upload class="photo-upload" [folderName]="folderName" (changeImagePath)="imgPathChanged($event)"></app-file-upload>
+
+                </div>
+            </div>
+            <div class="content-right_mapWrapper">
+                <agm-map class="map" (mapClick)="addMarker($event)" [latitude]="location.latitude" [longitude]="location.longitude" [zoom]="15">
+                    <div *ngIf="user.location">
+                        <agm-marker [latitude]="user.location.latitude" [longitude]="user.location.longitude"></agm-marker>
+                    </div>
+                </agm-map>
+            </div>
+
+        </div>
+    </div>
+</div>
