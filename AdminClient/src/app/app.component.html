@@ -1,0 +1,35 @@
+<div id="app">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <a href="#" class="navbar-brand">Be Healthy Admin client</a>
+        <ul class="navbar-nav mr-auto" routerLinkActive="active">
+            <li class="nav-item">
+                <a href="/challenges" class="nav-link" *ngIf="isLoggedIn" routerLink="challenges">Challenges </a>
+            </li>
+            <li class="nav-item">
+                <a href="/commits" class="nav-link" *ngIf="isLoggedIn" routerLink="commits">Commits</a>
+            </li>
+            <li class="nav-item">
+                <a href="/achievements" class="nav-link" *ngIf="isLoggedIn" routerLink="achievements">Achievements</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+                <a href="/login" class="nav-link" routerLink="login">Login</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <a class="nav-link">{{username}}</a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()">LogOut</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</div>

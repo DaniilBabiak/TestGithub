@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-9 mx-auto">
+      
+      <br>
+      <label>Your challenges:</label>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" sortable="Challenge.Name" (sort)="onSort($event)">Name</th>
+            <th scope="col" sortable="Challenge.Reward" (sort)="onSort($event)">Reward</th>
+            <th scope="col" sortable="Status" (sort)="onSort($event)">Status</th>
+            <th scope="col" sortable="Challenge.AvailableTo" (sort)="onSort($event)">Complete before</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userChallenge of userChallenges | paginate: config; let i = index">
+            <td>{{userChallenge.challenge.name}}</td>
+            <td>{{userChallenge.challenge.reward}}</td>
+            <td>{{userChallenge.status}}</td>
+            <td>{{userChallenge.challenge.availableTo | date: 'shortDate'}}</td>
+            <td><a routerLink="/userChallenge/{{userChallenge.id}}/details"><button class="btn btn-primary"> Show details</button></a></td> 
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination"(pageChange)="pageChanged($event)"></pagination-controls>
+    </div>
+  
+  </div>

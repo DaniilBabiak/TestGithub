@@ -1,0 +1,62 @@
+<div *ngIf="notificationSettings">
+    <label for="status">Receive achievement notifications</label>
+    <br>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="notificationSettings.sendAchievementNotification">
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="true"> Receive
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Do not receive
+        </label>
+    </div>
+    <br>
+    <label for="status">Receive challenge notifications</label>
+    <br>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="notificationSettings.sendChallengeNotification">
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="true"> Receive
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Do not receive
+        </label>
+    </div>
+    <br>
+    <label for="status">Receive commit notifications</label>
+    <br>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="notificationSettings.sendCommitNotification">
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="true"> Receive
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Do not receive
+        </label>
+    </div>
+    <br>
+    <label for="status">Receive expired challenge notifications</label>
+    <br>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="notificationSettings.sendUserChallengeNotification">
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="true"> Receive
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Do not receive
+        </label>
+    </div>
+    <br>
+    <label for="status">Receive venue notifications</label>
+    <br>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="notificationSettings.sendVenueNotification">
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="true"> Receive
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Do not receive
+        </label>
+    </div>
+    <br>
+    <br>
+    <button (click)="save()" class="btn btn-success"> Save </button>
+    <p *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" (closed)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+    </p>
+</div>

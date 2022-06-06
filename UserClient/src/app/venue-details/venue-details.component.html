@@ -1,0 +1,72 @@
+<div *ngIf="venue" class="container" style="margin-top: 70px;">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+                <div class="form-group">
+                    <label for="venueTitle">Venue title</label>
+                    <input type="text" class="form-control" name="venueTitle" placeholder="Enter venue title" [(ngModel)]="venue.title" required #venueTitle="ngModel" />
+                    <div class="alert alert-danger" role="alert" *ngIf="venueTitle.errors && f.submitted">
+                        Venue title is required!
+                    </div>
+                    <label for="description">Description</label>
+                    <textarea type="description" class="form-control" placeholder="Enter description of venue" name="description" [(ngModel)]="venue.description" required #description="ngModel"></textarea>
+                    <div class="alert alert-danger" role="alert" *ngIf="description.errors && f.submitted">
+                        Description is required!
+                    </div>
+                    <br>
+                    <label for="date">Venue date</label>
+                    <br>
+                    <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden"></ngb-datepicker>
+                    <br>
+                    <br>
+                    <div *ngIf="geolocation">
+                        <agm-map class="map" (mapClick)="addMarker($event)" [latitude]="geolocation.latitude" [longitude]="geolocation.longitude" [zoom]="15">
+                            <div *ngIf="venue.location">
+                                <agm-marker [latitude]="venue.location.latitude" [longitude]="venue.location.longitude"></agm-marker>
+                            </div>
+                        </agm-map>
+                    </div>
+                    <br>
+                </div>
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>Attendees</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <div *ngFor="let attendee of venue.attendees">
+                            <div class="profile-wrapper">
+                                <div class="profile-name">
+                                    <p class="profile-name_text">
+                                        {{attendee.userName}}
+                                    </p>
+                                </div>
+                                <div class="img-name">
+                                    <img class="profile_image" [src]="createImgPath(attendee.photoPath)" alt="user photo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div *ngIf="!venue.id">
+                    <button class="btn btn-primary btn-primary_footer">save</button>
+                </div>
+            </form>
+            <div *ngIf="canDelete">
+                <button class="btn btn-primary btn-primary_footer" (click)="delete()">delete</button>
+            </div>
+            <br>
+            <div *ngIf="venue.id">
+                <div *ngIf="isAssigned()">
+                    <button class="btn btn-primary btn-primary_footer" (click)="unassignUser()">unassign</button>
+                </div>
+                <div *ngIf="!isAssigned()">
+                    <button class="btn btn-primary btn-primary_footer" (click)="assignUser()">assign</button>
+                </div>
+                <br>
+            </div>
+            <button class="btn btn-primary btn-primary_footer" (click)="goBack()">go back</button>
+            <p *ngFor="let alert of alerts">
+                <ngb-alert [type]="alert.type" (closed)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+        </div>
+    </div>
+</div>

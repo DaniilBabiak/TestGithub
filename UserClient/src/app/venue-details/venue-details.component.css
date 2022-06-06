@@ -1,0 +1,27 @@
+.map {
+    width: 300px;
+    height: 300px;
+}
+
+.profile_image {
+    height: 24px;
+    width: 24px;
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.profile-name {
+    flex-basis: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.profile-name_text {
+    margin: 0;
+}
+
+.profile-wrapper {
+    display: flex;
+}
