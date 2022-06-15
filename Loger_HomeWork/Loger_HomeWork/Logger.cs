@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Loger_HomeWork.FileService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +9,15 @@ namespace Loger_HomeWork
 {
     public class Logger
     {
-        private static Logger _instance = null;
-        public static Logger LoggerInstance
+        
+        private readonly IFileService _fileService;
+       public Logger(IFileService fileService)
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new Logger();
-                }
-                return _instance;
-            }
+            _fileService = fileService;
+            Logs = new List<string>();
+           
         }
+
         public List <string> Logs { get; private set; }
         public void LogInfo(string message)
         {
@@ -27,7 +25,8 @@ namespace Loger_HomeWork
             var type = "[INFO]";
             var log = dt.ToString() + type + message;
             Console.WriteLine(log);
-            Logs.Add(log);  
+            Logs.Add(log);
+            _fileService.WriteToFile(log);
         }
         public void LogWarn(string message)
         {
@@ -36,6 +35,7 @@ namespace Loger_HomeWork
             var log = dt.ToString() + type + message;
             Console.WriteLine(log);
             Logs.Add(log);
+            _fileService.WriteToFile(log);
         }
         public void LogError(string message)
         {
@@ -44,8 +44,9 @@ namespace Loger_HomeWork
             var log = dt.ToString() + type + message;
             Console.WriteLine(log);
             Logs.Add(log);
+            _fileService.WriteToFile(log);
         }
-        private Logger() { Logs = new List<string>(); }
+       
            
     }
 }
