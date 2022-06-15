@@ -1,4 +1,6 @@
-﻿namespace Loger_HomeWork
+﻿using Loger_HomeWork.FileService;
+
+namespace Loger_HomeWork
 {
     internal class Program
     {
@@ -6,7 +8,7 @@
         {
             var starter = new Starter();
             starter.Run();
-           
+
         }
     }
 }
